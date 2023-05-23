@@ -69,6 +69,19 @@ const checkYear = async (year) => {
   return true;
 };
 
+const results = (day, month, year) => {
+  const userDate = new Date(`${year}-${month}-${day}`);
+  const now = new Date();
+
+  const difference = now.getTime() - userDate.getTime();
+  const ageDate = new Date(difference);
+  const ageDay = ageDate.getUTCDate() - 1;
+  const ageMonth = ageDate.getUTCMonth();
+  const ageYear = ageDate.getUTCFullYear() - 1970;
+
+  console.log(ageYear, ageMonth, ageDay);
+};
+
 const validateInputs = async () => {
   const day = dayInput.value.trim();
   const month = monthInput.value.trim();
@@ -80,6 +93,7 @@ const validateInputs = async () => {
     (await checkYear(year))
   ) {
     console.log("Obtendo resultados");
+    results(day, month, year);
   }
 };
 
