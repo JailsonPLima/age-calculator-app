@@ -26,7 +26,7 @@
     <main class="l-main">
       <form class="l-form">
         <header class="l-header">
-          <div class="m-input-box">
+          <div class="m-input-box m-error">
             <label class="m-input-box__label" for="day">DAY</label>
             <input
               class="m-input-box__input m-input-box__input--day"
@@ -35,6 +35,7 @@
               placeholder="DD"
               spellcheck="false"
             />
+            <span class="m-error__message m-error__message--day"></span>
           </div>
           <div class="m-input-box">
             <label class="m-input-box__label" for="month">MONTH</label>
@@ -45,6 +46,7 @@
               placeholder="MM"
               spellcheck="false"
             />
+            <span class="m-error__message m-error__message--month"></span>
           </div>
           <div class="m-input-box">
             <label class="m-input-box__label" for="year">YEAR</label>
@@ -55,6 +57,7 @@
               placeholder="YYYY"
               spellcheck="false"
             />
+            <span class="m-error__message m-error__message--year"></span>
           </div>
         </header>
         <div class="m-divider">
@@ -69,7 +72,18 @@
 
       <section class="l-results">
         <h1 class="l-results__title">
-          <span>38</span> years <span>3</span> months <span>26</span> days
+          <span class="l-results__span"
+            ><mark class="l-results__mark l-results__mark--years">--</mark>
+            years</span
+          >
+          <span class="l-results__span"
+            ><mark class="l-results__mark l-results__mark--months">--</mark>
+            months</span
+          >
+          <span class="l-results__span"
+            ><mark class="l-results__mark l-results__mark--days">--</mark>
+            days</span
+          >
         </h1>
       </section>
     </main>
