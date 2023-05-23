@@ -23,6 +23,52 @@
     <title>Age calculator app</title>
   </head>
   <body>
-    <h1>Hello world</h1>
+    <main class="l-main">
+      <header class="l-header">
+        <div class="m-input-box">
+          <label class="m-input-box__label" for="day">DAY</label>
+          <input
+            class="m-input-box__input"
+            type="text"
+            name="day"
+            placeholder="DD"
+            spellcheck="false"
+          />
+        </div>
+        <div class="m-input-box">
+          <label class="m-input-box__label" for="month">MONTH</label>
+          <input
+            class="m-input-box__input"
+            type="text"
+            name="month"
+            placeholder="MM"
+            spellcheck="false"
+          />
+        </div>
+        <div class="m-input-box">
+          <label class="m-input-box__label" for="year">YEAR</label>
+          <input
+            class="m-input-box__input"
+            type="text"
+            name="year"
+            placeholder="YYYY"
+            spellcheck="false"
+          />
+        </div>
+      </header>
+      <div class="m-divider">
+        <button
+          class="m-divider__submit-input"
+          type="submit"
+          value=""
+          name="submit"
+        ></button>
+      </div>
+      <section class="l-results">
+        <h1 class="l-results__title">
+          <span>38</span> years <span>3</span> months <span>26</span> days
+        </h1>
+      </section>
+    </main>
   </body>
 </html>
