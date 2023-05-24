@@ -26,7 +26,7 @@
     <main class="l-main">
       <form class="l-form">
         <header class="l-header">
-          <div class="m-input-box m-error">
+          <div class="m-input-box m-input-box--day">
             <label class="m-input-box__label" for="day">DAY</label>
             <input
               class="m-input-box__input m-input-box__input--day"
@@ -34,10 +34,11 @@
               name="day"
               placeholder="DD"
               spellcheck="false"
+              autocomplete="off"
             />
             <span class="m-error__message m-error__message--day"></span>
           </div>
-          <div class="m-input-box">
+          <div class="m-input-box m-input-box--month">
             <label class="m-input-box__label" for="month">MONTH</label>
             <input
               class="m-input-box__input m-input-box__input--month"
@@ -45,10 +46,11 @@
               name="month"
               placeholder="MM"
               spellcheck="false"
+              autocomplete="off"
             />
             <span class="m-error__message m-error__message--month"></span>
           </div>
-          <div class="m-input-box">
+          <div class="m-input-box m-input-box--year">
             <label class="m-input-box__label" for="year">YEAR</label>
             <input
               class="m-input-box__input m-input-box__input--year"
@@ -56,6 +58,7 @@
               name="year"
               placeholder="YYYY"
               spellcheck="false"
+              autocomplete="off"
             />
             <span class="m-error__message m-error__message--year"></span>
           </div>

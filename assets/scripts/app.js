@@ -4,6 +4,16 @@ const dayInput = document.querySelector(".m-input-box__input--day");
 const monthInput = document.querySelector(".m-input-box__input--month");
 const yearInput = document.querySelector(".m-input-box__input--year");
 
+const dayInputBox = document.querySelector(".m-input-box--day");
+const monthInputBox = document.querySelector(".m-input-box--month");
+const yearInputBox = document.querySelector(".m-input-box--year");
+
+const dayInputErr = document.querySelector(".m-error__message--day");
+const monthInputErr = document.querySelector(".m-error__message--month");
+const yearInputErr = document.querySelector(".m-error__message--year");
+
+let isValid;
+
 const getCurrentDate = async () => {
   const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
@@ -20,53 +30,71 @@ const getCurrentDate = async () => {
 
 const checkDay = (day, month, year) => {
   if (day === "") {
-    console.log("This field is required: day");
-    return false;
+    dayInputBox.classList.add("m-error");
+    dayInputErr.textContent = "This field is required";
+    isValid = false;
+    return;
   }
 
   if (parseInt(day) > 31 || parseInt(day) <= 0 || day.length !== 2) {
-    console.log("Must be a valid day");
-    return false;
+    dayInputBox.classList.add("m-error");
+    dayInputErr.textContent = "Must be a valid day";
+    isValid = false;
+    return;
   }
 
   const userDate = new Date(`${year}-${month}-${day}`);
 
-  if (userDate.getMonth() + 1 !== parseInt(month)) {
-    console.log("Must be a valid day");
-    return false;
+  if (
+    userDate.getMonth() + 1 !== parseInt(month) &&
+    month.length === 2 &&
+    year.length === 4
+  ) {
+    dayInputBox.classList.add("m-error");
+    dayInputErr.textContent = "Must be a valid day";
+    isValid = false;
+    return;
   }
 
-  return true;
+  isValid = true;
 };
 
 const checkMonth = (month) => {
   if (month === "") {
-    console.log("This field is required: month");
-    return false;
+    monthInputBox.classList.add("m-error");
+    monthInputErr.textContent = "This field is required";
+    isValid = false;
+    return;
   }
 
   if (parseInt(month) > 12 || parseInt(month) <= 0 || month.length !== 2) {
-    console.log("Must be a valid month");
-    return false;
+    monthInputBox.classList.add("m-error");
+    monthInputErr.textContent = "Must be a valid month";
+    isValid = false;
+    return;
   }
 
-  return true;
+  isValid = true;
 };
 
 const checkYear = async (year) => {
   if (year === "") {
-    console.log("This field is required: year");
-    return false;
+    yearInputBox.classList.add("m-error");
+    yearInputErr.textContent = "This field is required";
+    isValid = false;
+    return;
   }
 
   const maxYear = (await getCurrentDate()).getFullYear();
 
   if (year > maxYear || parseInt(year) <= 0 || year.length !== 4) {
-    console.log("Must be a valid year");
-    return false;
+    yearInputBox.classList.add("m-error");
+    yearInputErr.textContent = "Must be a valid year";
+    isValid = false;
+    return;
   }
 
-  return true;
+  isValid = true;
 };
 
 const results = (day, month, year) => {
@@ -82,16 +110,27 @@ const results = (day, month, year) => {
   console.log(ageYear, ageMonth, ageDay);
 };
 
+const removeErrors = () => {
+  const inputBoxes = [...document.querySelectorAll(".m-input-box")];
+  const errorMessages = [...document.querySelectorAll(".m-error__message")];
+  inputBoxes.forEach((inputBox) => {
+    inputBox.classList.remove("m-error");
+  });
+  errorMessages.forEach((errorMessage) => {
+    errorMessage.textContent = "";
+  });
+};
+
 const validateInputs = async () => {
   const day = dayInput.value.trim();
   const month = monthInput.value.trim();
   const year = yearInput.value.trim();
 
-  if (
-    checkDay(day, month, year) &&
-    checkMonth(month) &&
-    (await checkYear(year))
-  ) {
+  checkDay(day, month, year);
+  checkMonth(month);
+  await checkYear(year);
+
+  if (isValid) {
     console.log("Obtendo resultados");
     results(day, month, year);
   }
@@ -99,5 +138,6 @@ const validateInputs = async () => {
 
 form.addEventListener("submit", (event) => {
   event.preventDefault();
+  removeErrors();
   validateInputs();
 });
