@@ -16,7 +16,7 @@ const resultDays = document.querySelector(".l-results__mark--days");
 const resultMonths = document.querySelector(".l-results__mark--months");
 const resultYears = document.querySelector(".l-results__mark--years");
 
-let isValid;
+let isValid = [];
 
 const inputMask = (input, length) => {
   let value = input.value;
@@ -47,14 +47,14 @@ const checkDay = (day, month, year) => {
   if (day === "") {
     dayInputBox.classList.add("m-error");
     dayInputErr.textContent = "This field is required";
-    isValid = false;
+    isValid.push(false);
     return;
   }
 
-  if (parseInt(day) > 31 || parseInt(day) <= 0 || day.length !== 2) {
+  if (parseInt(day) > 31 || parseInt(day) < 1 || day.length !== 2) {
     dayInputBox.classList.add("m-error");
     dayInputErr.textContent = "Must be a valid day";
-    isValid = false;
+    isValid.push(false);
     return;
   }
 
@@ -63,53 +63,54 @@ const checkDay = (day, month, year) => {
   if (
     userDate.getMonth() + 1 !== parseInt(month) &&
     month.length === 2 &&
-    year.length === 4
+    year.length === 4 &&
+    parseInt(day) !== 1
   ) {
     dayInputBox.classList.add("m-error");
     dayInputErr.textContent = "Must be a valid day";
-    isValid = false;
+    isValid.push(false);
     return;
   }
 
-  isValid = true;
+  isValid.push(true);
 };
 
 const checkMonth = (month) => {
   if (month === "") {
     monthInputBox.classList.add("m-error");
     monthInputErr.textContent = "This field is required";
-    isValid = false;
+    isValid.push(false);
     return;
   }
 
-  if (parseInt(month) > 12 || parseInt(month) <= 0 || month.length !== 2) {
+  if (parseInt(month) > 12 || parseInt(month) < 1 || month.length !== 2) {
     monthInputBox.classList.add("m-error");
     monthInputErr.textContent = "Must be a valid month";
-    isValid = false;
+    isValid.push(false);
     return;
   }
 
-  isValid = true;
+  isValid.push(true);
 };
 
 const checkYear = async (year) => {
   if (year === "") {
     yearInputBox.classList.add("m-error");
     yearInputErr.textContent = "This field is required";
-    isValid = false;
+    isValid.push(false);
     return;
   }
 
   const maxYear = (await getCurrentDate()).getFullYear();
 
-  if (year > maxYear || parseInt(year) <= 0 || year.length !== 4) {
+  if (year > maxYear || parseInt(year) < 1 || year.length !== 4) {
     yearInputBox.classList.add("m-error");
     yearInputErr.textContent = "Must be a valid year";
-    isValid = false;
+    isValid.push(false);
     return;
   }
 
-  isValid = true;
+  isValid.push(true);
 };
 
 const results = (day, month, year) => {
@@ -147,10 +148,12 @@ const validateInputs = async () => {
   checkMonth(month);
   await checkYear(year);
 
-  if (isValid) {
+  if (isValid.every((period) => period)) {
+    isValid.splice(0, isValid.length);
     console.log("Obtendo resultados");
     results(day, month, year);
   } else {
+    isValid.splice(0, isValid.length);
     resultDays.textContent = "--";
     resultMonths.textContent = "--";
     resultYears.textContent = "--";
