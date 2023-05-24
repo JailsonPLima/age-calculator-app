@@ -11,7 +11,7 @@ body {
 
 body {
   background-color: var(--off-white);
-  padding: 5.5rem 1rem;
+  padding: 5.5rem 1rem 2rem;
 }
 
 .l-main {
@@ -133,6 +133,13 @@ body {
   color: var(--purple);
 }
 
+.l-attribution {
+  padding-top: 5.5rem;
+  font-size: 0.875rem;
+  font-weight: 400;
+  text-align: center;
+}
+
 @media screen and (min-width: 48rem) {
   body {
     display: grid;
@@ -174,5 +181,9 @@ body {
 
   .l-results__title {
     font-size: 6.5rem;
+  }
+
+  .l-attribution {
+    font-size: 0.875rem;
   }
 }
