@@ -30,7 +30,7 @@ Os usuários devem ser capazes de:
 ### Capturas-de-tela
 
 <!-- ![Mobile screenshot](./screenshots/mobile.png) -->
-<img src="./screenshots/mobile.png" alt="Mobile screenshot" width="500" />
+<img src="./screenshots/mobile.png" alt="Mobile screenshot" width="350" />
 
 ![Desktop screenshot](./screenshots/desktop.png)
 
