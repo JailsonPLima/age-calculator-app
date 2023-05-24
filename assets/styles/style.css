@@ -112,6 +112,10 @@ body {
   background-color: var(--off-black);
 }
 
+.m-divider__image {
+  max-width: 1.75rem;
+}
+
 .l-results__title {
   font-size: 3.375rem;
   font-weight: 800;
@@ -163,6 +167,10 @@ body {
   .m-divider__submit-input {
     width: 6rem;
     height: 6rem;
+  }
+
+  .m-divider__image {
+    max-width: initial;
   }
 
   .l-results__title {
