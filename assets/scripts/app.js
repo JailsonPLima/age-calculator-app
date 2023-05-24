@@ -18,6 +18,17 @@ const resultYears = document.querySelector(".l-results__mark--years");
 
 let isValid;
 
+const inputMask = (input, length) => {
+  let value = input.value;
+  value = value.replace(/\D/g, "");
+  value = value.slice(0, length);
+  input.value = value;
+};
+
+dayInput.addEventListener("input", () => inputMask(dayInput, 2));
+monthInput.addEventListener("input", () => inputMask(monthInput, 2));
+yearInput.addEventListener("input", () => inputMask(yearInput, 4));
+
 const getCurrentDate = async () => {
   const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
