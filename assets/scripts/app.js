@@ -12,6 +12,10 @@ const dayInputErr = document.querySelector(".m-error__message--day");
 const monthInputErr = document.querySelector(".m-error__message--month");
 const yearInputErr = document.querySelector(".m-error__message--year");
 
+const resultDays = document.querySelector(".l-results__mark--days");
+const resultMonths = document.querySelector(".l-results__mark--months");
+const resultYears = document.querySelector(".l-results__mark--years");
+
 let isValid;
 
 const getCurrentDate = async () => {
@@ -107,7 +111,9 @@ const results = (day, month, year) => {
   const ageMonth = ageDate.getUTCMonth();
   const ageYear = ageDate.getUTCFullYear() - 1970;
 
-  console.log(ageYear, ageMonth, ageDay);
+  resultDays.textContent = ageDay;
+  resultMonths.textContent = ageMonth;
+  resultYears.textContent = ageYear;
 };
 
 const removeErrors = () => {
@@ -133,6 +139,10 @@ const validateInputs = async () => {
   if (isValid) {
     console.log("Obtendo resultados");
     results(day, month, year);
+  } else {
+    resultDays.textContent = "--";
+    resultMonths.textContent = "--";
+    resultYears.textContent = "--";
   }
 };
 
